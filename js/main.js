@@ -21,7 +21,7 @@ let precio = 0;
 let contador = 0;
 let totalEnProductos = 0;
 let costoTotal = 0;
-
+//limpiar productos
 btnClear.addEventListener("click", function (event) {
   event.preventDefault();
   txtName.value = "";
@@ -126,4 +126,24 @@ txtNumber.addEventListener("blur", function (event) {
   event.preventDefault();
   txtNumber.value = txtNumber.value.trim();
   txtName.value = txtName.value.trim();
+});
+
+// carga items al abrir
+window.addEventListener("load", function () {
+  if (localStorage.getItem("contadorProductos") == null) {
+    localStorage.setItem("contadorProductos", "0");
+  }
+  if (localStorage.getItem("totalEnProductos") == null) {
+    localStorage.setItem("totalEnProductos", "0");
+  }
+  if (localStorage.getItem("costoTotal") == null) {
+    localStorage.setItem("costoTotal", "0.0");
+  }
+  contador = parseInt(localStorage.getItem("contadorProductos"));
+  totalEnProductos = parseInt(localStorage.getItem("totalEnProductos"));
+  costoTotal = parseFloat(localStorage.getItem("costoTotal"));
+
+  contadorProductos.innerText = contador;
+  productosTotal.innerText = totalEnProductos;
+  precioTotal.innerText = `$${costoTotal}`;
 });
